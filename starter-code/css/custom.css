@@ -59,7 +59,6 @@ input[type="checkbox"] {
 }
 
 #start {
-
   clear: left;
   float: left;
   background-color: blue;
@@ -72,5 +71,5 @@ input[type="checkbox"] {
 
 #answer {
   display: block;
-  margin: 100px;
+  margin: 50px;
 }
