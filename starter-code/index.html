@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/custom.css">
     <script src="js/tenSecondsMath.js" async></script>
 
     <!--  Added Libraries -->
@@ -13,12 +14,46 @@
   </head>
   <body>
 
-    <h1><span id="random1">Random1</span><span id="operation"> operation </span><span id="random2"> Random2</span></h1>
-    <input type="text" id="answer">
-    <button type="submit" onclick="checkAnswer()">Submit Answer</button>
+    <img src="images/board.jpg">
+    <h1>10 Second Maths Game</h1>
+    <section>
+
+    <div id="start-screen">
+      <h2>Game Options</h2>
+      <h4>Number Limit: <span>10</span></h4>
+      <input type="range" min = "10" max="100" value="">
+      <h3>Operators</h3>
+
+      <div class = "options">
+        <input type="checkbox" id="addCheck" value="value">
+        <img class="operator" src="images/add.jpg" alt="">
+      </div>
+      <div class = "options">
+        <input type="checkbox" id="minusCheck" value="value">
+        <img class="operator" src="images/substract.jpg" alt="">
+      </div>
+      <div class = "options">
+        <input type="checkbox" id="multCheck" value="value">
+        <img class="operator" src="images/multiply.jpg" alt="">
+      </div>
+      <div class = "options">
+        <input type="checkbox" id="divideCheck" value="value">
+        <img class="operator" src="images/divide.jpg" alt="">
+      </div>
+
+      <button id="start">Start Game</button>
+    </div>
+
+    <div class="display-none" id="game-started">
+      <h1><span id="random1">Random1</span><span id="operation"> operation </span><span id="random2"> Random2</span></h1>
+      <input type="text" id="answer">
+      <button type="submit" onclick="checkAnswer()" id="submit">Submit Answer</button>
+    </div>
+
+    </section>
 
 
     <!-- Custon JavaScript -->
-
+  <script src="js/application.js" async></script>
   </body>
 </html>

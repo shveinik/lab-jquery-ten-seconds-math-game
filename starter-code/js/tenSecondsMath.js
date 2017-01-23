@@ -58,8 +58,8 @@ function questionGen() {
 
 document.getElementById("operation").innerHTML = this.userOperation;
 
-if (random1 > random2){  
-  document.getElementById("random1").innerHTML = random1;  
+if (random1 > random2){
+  document.getElementById("random1").innerHTML = random1;
   document.getElementById("random2").innerHTML = random2;
 } else {
   document.getElementById("random1").innerHTML = random2;
@@ -69,24 +69,35 @@ if (random1 > random2){
 
 game.newQuestion();
 
-// document.getElementById("random1").innerHTML =
+function newGame() {
+  random1 = randomGen();
+  random2 = randomGen();
+  game.newQuestion();
+  document.getElementById("answer").value = "";
+  document.getElementById("answer").style.borderColor = "inherit";
+}
 
 function isCorrectAnswer(userAnswer) {
-  console.log(answer);
   if (userAnswer == answer) {
     console.log("You are correct sir.");
+    newGame();
   }
   else {
+    document.getElementById("answer").style.borderColor = "red";
+    runAgain = 0;
     console.log("Nope, guess again.");
   }
 
 }
 
+
+
+
+
 function checkAnswer() {
   var userAnswer = document.getElementById('answer').value;
   isCorrectAnswer(userAnswer);
 }
-
 
 
 // Checks a user answer
