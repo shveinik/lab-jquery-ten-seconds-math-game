@@ -11,67 +11,23 @@ function TenSecondsMathGame(operation, topLimit) {
     this.isCorrectAnswer = isCorrectAnswer;
 }
 
-//Assign operator according to button checked - when start button is clicked.
+var randomGen, answer;
 
-var userOperator;
+function questionGen() {
 
-function getUserOperator(){
-  var numberOfCheckboxes = document.getElementsByClassName("userOperator").length;
-  var checkboxes = document.getElementsByClassName("userOperator");
+  // Returns a random integer between [1..numberLimit]
 
-  for (var i=0; i < numberOfCheckboxes; i++){
-    if(checkboxes[i].checked == true) {
-      switch(checkboxes[i].id){
-        case "addCheck":
-          userOperator = "+";
-          break;
-        case "minusCheck":
-          userOperator = "-";
-          break;
-        case "multCheck":
-          userOperator = "*";
-          break;
-        case "divideCheck":
-          userOperator = "/";
-          break;
-      }
-    }
-  }
+  randomGen = function() {
+    return Math.floor(Math.random() * (game.userTopLimit - 1)) +1;
+  };
 
-  console.log(userOperator);
-}
+  // Returns an object with {question, answer}
 
-document.getElementById("start").onclick = function(){
-  getUserOperator();
-  document.getElementById("game-started").setAttribute("class", "display");
-  document.getElementById("start-screen").setAttribute("class", "display-none");
-};
-
-console.log(userOperator);
-
-//Assign limit based on what user has selected on sliding scale
-
-
-
-//Generate new game based on user operator and limit selected
-
-var game = new TenSecondsMathGame("-",10);
-
-// Returns a random integer between [1..numberLimit]
-
-var randomGen = function() {
-  return Math.floor(Math.random() * (game.userTopLimit - 1)) +1;
-};
-
-// Returns an object with {question, answer}
-
-var random1 = randomGen();
-var random2 = randomGen();
-var answer;
+  var random1 = randomGen();
+  var random2 = randomGen();
 
 //Reruns random number generators if difference is between 0 and 3
 
-function questionGen() {
   var reRunRandom = function(){
     while((random1 - random2 < 3 &&  random1 - random2 >= 0) || (random2 - random1 < 3 && random2 - random1 >= 0)){
     random1 = randomGen();
@@ -104,7 +60,6 @@ function questionGen() {
 
   }
 
-
 //HTML section
 
 //Shows which operator has been selected in HTML
@@ -113,17 +68,16 @@ document.getElementById("operation").innerHTML = this.userOperation;
 
 //Switched HTML numbers depending on which is bigger
 
-  if (random1 > random2){
+  if (random1 > random2 || game.userOperation == "/"){
     document.getElementById("random1").innerHTML = random1;
     document.getElementById("random2").innerHTML = random2;
-  } else {
+  } else if (random2 < random1) {
     document.getElementById("random1").innerHTML = random2;
     document.getElementById("random2").innerHTML = random1;
   }
-}
 
-//Function to start first game, HTML not shown until start game button is clicked
-game.newQuestion();
+
+}
 
 
 //function to run new game
@@ -139,11 +93,12 @@ function newGame() {
 //function to check if correct answer - runs new game function if answer is correct
 
 function isCorrectAnswer(userAnswer) {
+  console.log(userAnswer,answer);
   if (userAnswer == answer) {
     console.log("You are correct sir.");
     newGame();
   }
-  else {
+  else if (userAnswer != answer){
     document.getElementById("answer").style.borderColor = "red";
     runAgain = 0;
     console.log("Nope, guess again.");
